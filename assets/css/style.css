@@ -39,11 +39,23 @@ body {
 
 #timer {
     position: absolute;
-    bottom: 22%;
-    left: 27%;
     z-index: 3;
     font-family: "Caveat", cursive;
     color: #000;
-    font-size: 40px;
+    font-size: 50px;
     font-weight: 900;
+    bottom: 200px; /* Position verticale par rapport au conteneur */
+    left: 550px; /* Position horizontale par rapport au conteneur */
+    background-position: -100px -50px; /* Position de l'élément par rapport à l'image de fond */
+}
+#response {
+    position: absolute;
+    z-index: 3;
+    font-family: "Caveat", cursive;
+    color: #FFF;
+    font-size: 50px;
+    font-weight: 900;
+    bottom: 12%;
+    left: 50%;
+  transform: translateX(-30%);
 }

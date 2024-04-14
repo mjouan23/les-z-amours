@@ -11,6 +11,9 @@ const timerElement = document.getElementById('timer');
 const sound = document.getElementById('sound');
 const soundHeartYellow = document.getElementById('soundHeartYellow');
 const soundHeartRed = document.getElementById('soundHeartRed');
+const response = document.getElementById('response');
+let cptResponse = 0;
+const arRespoonse = ["réponse 1", "réponse 2", "réponse 3", "réponse 4","réponse 5", "réponse 1", "réponse 2", "réponse 3", "réponse 4","réponse 5", "réponse 1", "réponse 2", "réponse 3", "réponse 4","réponse 5", "réponse 1", "réponse 2", "réponse 3", "réponse 4","réponse 5", "réponse 1", "réponse 2", "réponse 3", "réponse 4","réponse 5", "réponse 1", "réponse 2", "réponse 3", "réponse 4","réponse 5"]
 
 document.addEventListener('keydown', function(event) {
     // Coeur jaune
@@ -18,7 +21,9 @@ document.addEventListener('keydown', function(event) {
         if(cpt <= 10) {
             heartsYellow[cpt].style.display = 'block';
             soundHeartYellow.play();
-            cpt++; 
+            cpt++;
+            response.textContent = arRespoonse[cptResponse];
+            if(cptResponse < arRespoonse.length) cptResponse++;
         }
     }
     // Coeur rouge
@@ -26,8 +31,14 @@ document.addEventListener('keydown', function(event) {
         if(cpt <= 10) {
             heartsRed[cpt].style.display = 'block';
             soundHeartRed.play();        
-            cpt++; 
+            cpt++;
+            response.textContent = arRespoonse[cptResponse];
+            if(cptResponse < arRespoonse.length) cptResponse++;
         }
+    }
+    else if (event.key === "Enter") {
+        response.textContent = arRespoonse[cptResponse];
+        if(cptResponse < arRespoonse.length) cptResponse++;
     }
     // supprimer un coeur
     else if (event.key === "Backspace") {
@@ -37,10 +48,13 @@ document.addEventListener('keydown', function(event) {
     }
     else if (event.key === ' ') {
         startTime();
+        response.textContent = arRespoonse[cptResponse];
+        if(cptResponse < arRespoonse.length) cptResponse++;
     }
     else if (event.key === 'q') {
         stopTimer();
     }
+    
 });
 
 function startTime() {
