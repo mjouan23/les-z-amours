@@ -1,0 +1,46 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: "Roboto Condensed", sans-serif;
+}
+
+body {
+    height: 100vh;
+    background-color: #000;
+    overflow: hidden;
+}
+
+.background_finale {
+    position: absolute;
+    top: 50%; /* Déplace l'image de 50% vers le bas */
+    left: 50%; /* Déplace l'image de 50% vers la droite */
+    transform: translate(-50%, -50%); /* Recentre l'image en ajustant sa position de moitié de sa taille */
+    height: 100%;
+    max-width: 100%;
+    z-index: 2;
+}
+
+.hearts > img {
+    display: none;
+}
+
+#videoElement {
+    position: absolute;
+    z-index: 0;
+    max-height: 100%;
+    width: 100%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-43%, -50%); /* Recentre l'image en ajustant sa position de moitié de sa taille */
+    z-index: 1;
+}
+
+#timer {
+    position: absolute;
+    bottom: 20%;
+    left: 40%;
+    z-index: 3;
+    color: #FFF;
+}
