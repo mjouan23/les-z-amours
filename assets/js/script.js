@@ -13,7 +13,19 @@ const soundHeartYellow = document.getElementById('soundHeartYellow');
 const soundHeartRed = document.getElementById('soundHeartRed');
 const response = document.getElementById('response');
 let cptResponse = 0;
-const arRespoonse = ["réponse 1", "réponse 2", "réponse 3", "réponse 4","réponse 5", "réponse 1", "réponse 2", "réponse 3", "réponse 4","réponse 5", "réponse 1", "réponse 2", "réponse 3", "réponse 4","réponse 5", "réponse 1", "réponse 2", "réponse 3", "réponse 4","réponse 5", "réponse 1", "réponse 2", "réponse 3", "réponse 4","réponse 5", "réponse 1", "réponse 2", "réponse 3", "réponse 4","réponse 5"]
+
+const url = 'https://imajys.fr/data.php';
+let arRespoonse;
+// Utilisation de l'API Fetch pour récupérer les données JSON
+fetch(url).then(res => {
+    console.log(res);
+    return res.json();
+}).then(data => {
+    arRespoonse = Object.values(data.data);
+}).catch(error => {
+    console.error('There was a problem with your fetch operation:', error);
+});
+
 
 document.addEventListener('keydown', function(event) {
     // Coeur jaune
