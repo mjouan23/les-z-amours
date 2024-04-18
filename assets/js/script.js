@@ -1,98 +1,88 @@
-let cpt = 0;
-let heartsYellow = document.querySelectorAll('.hearts > img.heart_yellow');
-let heartsRed = document.querySelectorAll('.hearts > img.heart_red');
-let timerId;
-let timeTimer = 60;
-
-let timeRest = timeTimer; 
-
-// Sélectionner l'élément où afficher le temps restant
-const timerElement = document.getElementById('timer');
-const sound = document.getElementById('sound');
-const soundHeartYellow = document.getElementById('soundHeartYellow');
-const soundHeartRed = document.getElementById('soundHeartRed');
-const question = document.getElementById('question');
-const response = document.getElementById('response');
-let cptResponse = 0;
-
-const url = 'https://imajys.fr/data.php';
-let arQuestion, arRespoonse;
-// Utilisation de l'API Fetch pour récupérer les données JSON
-fetch(url).then(res => {
-    console.log(res);
-    return res.json();
-}).then(data => {
-    arQuestion = Object.keys(data.data);
-    arRespoonse = Object.values(data.data);
-    console.log(arQuestion);
-}).catch(error => {
-    console.error('There was a problem with your fetch operation:', error);
-});
-
+let audio;
+let divScoreBlue = document.getElementById('scoreBlue');
+let divScoreYellow = document.getElementById('scoreYellow');
+let divScoreRed = document.getElementById('scoreRed');
 
 document.addEventListener('keydown', function(event) {
-    // Coeur jaune
-    if (event.key === 'j') {
-        if(cpt <= 10) {
-            heartsYellow[cpt].style.display = 'block';
-            soundHeartYellow.play();
-            cpt++;
-            question.textContent = arQuestion[cptResponse];
-            response.textContent = arRespoonse[cptResponse];
-            if(cptResponse < arRespoonse.length) cptResponse++;
-        }
-    }
-    // Coeur rouge
-    else if (event.key === 'r') {
-        if(cpt <= 10) {
-            heartsRed[cpt].style.display = 'block';
-            soundHeartRed.play();        
-            cpt++;
-            question.textContent = arQuestion[cptResponse];
-            response.textContent = arRespoonse[cptResponse];
-            if(cptResponse < arRespoonse.length) cptResponse++;
-        }
-    }
-    else if (event.key === "Enter") {
-        question.textContent = arQuestion[cptResponse];
-        response.textContent = arRespoonse[cptResponse];
-        if(cptResponse < arRespoonse.length) cptResponse++;
-    }
-    // supprimer un coeur
-    else if (event.key === "Backspace") {
-        if(cpt > 0) cpt--;
-        heartsYellow[cpt].style.display = 'none';
-        heartsRed[cpt].style.display = 'none';
-    }
-    else if (event.key === ' ') {
-        startTime();
-        question.textContent = arQuestion[cptResponse];
-        response.textContent = arRespoonse[cptResponse];
-        if(cptResponse < arRespoonse.length) cptResponse++;
-    }
-    else if (event.key === 'q') {
-        stopTimer();
-    }
+    event.preventDefault();
     
-});
+    // Point à l'équipe bleue
+    if (event.key === "b") {
+        let scoreBlue = parseInt(divScoreBlue.textContent);
+        scoreBlue++;
+        divScoreBlue.textContent = scoreBlue;
+    }
+    // Point à l'équipe jaune
+    else if (event.key === "j") {
+        let scoreYellow = parseInt(divScoreYellow.textContent);
+        scoreYellow++;
+        divScoreYellow.textContent = scoreYellow;
+    }
+    // Point à l'équipe rouge
+    else if (event.key === "r") {
+        let scoreRed = parseInt(divScoreRed.textContent);
+        scoreRed++;
+        divScoreRed.textContent = scoreRed;
+    }
+    // finale 
+    else if (event.key === "Enter") {
+        window.location.href = "finale.html";
+    }
 
-function startTime() {
-    timerElement.textContent = timeRest.toString().padStart(2, '0');
-    timerId = setInterval(function() {
-        timeRest--;
-        timerElement.textContent = timeRest.toString().padStart(2, '0');
-        if (timeRest <= 0) {
-            clearInterval(timerId);
+    // Gestion des jingles
+    if(event.key == "F1" || event.key == "F2" || event.key == "F3" || event.key == "F4" || event.key == "F5" || event.key == "F6" || event.key == "F7" || event.key == "F8" || event.key == "F9" || event.key == "F10" || event.key == "F11" || event.key == "F12") {
+        if (audio && !audio.paused) {
+            audio.pause();
         }
-    }, 1000);
-    sound.play();
-}
 
-// Fonction pour arrêter le minuteur
-function stopTimer() {
-    clearInterval(timerId); // Arrêter le minuteur
-    timerElement.textContent = '60'; // Effacer le contenu du timer
-    timeRest = timeTimer;
-    sound.pause();
-    sound.currentTime = 0;        
-}
+        // Manche 1 Question 1 
+        if (event.key === "F1") {
+            audio = new Audio("../assets/audio/Manche_1_Question_1_Encore_un_matin.mp3");
+        }
+        // Manche 1 Question 2 
+        else if (event.key === "F2") {
+            audio = new Audio("../assets/audio/Manche_1_Question_2_clip_de_la_ferme_des_fatals_picards.mp3");
+        }
+        // Manche 1 Question 3 
+        else if (event.key === "F3") {
+            audio = new Audio("../assets/audio/Manche_1_Question_3_Publicité_Coca-Cola_Light.mp3");
+        }
+        // Manche 1 Question 4
+        else if (event.key === "F4") {
+            audio = new Audio("../assets/audio/Manche_1_Question_4_BA_CESAR_2016.mp3");
+        }
+        // Manche 1 Question 5 
+        else if (event.key === "F5") {
+            audio = new Audio("../assets/audio/Manche_1_Question_5_Soprano_Mon_précieux.mp3");
+        }
+        // Manche 1 Question 6 
+        else if (event.key === "F6") {
+            audio = new Audio("../assets/audio/Manche_1_Question_6_Joe_Cocker_You_Can_Leave_Your_Hat_On.mp3");
+        }
+        // Manche 2 Question 1 
+        if (event.key === "F7") {
+            audio = new Audio("../assets/audio/Manche_2_Question_1_Le_plus_beau_cadeau_du_monde.mp3");
+        }
+        // Manche 2 Question 2 
+        else if (event.key === "F8") {
+            audio = new Audio("../assets/audio/Manche_2_Question_2_Boulevard_des_Airs_Emmène-moi.mp3");
+        }
+        // Manche 2 Question 3 
+        else if (event.key === "F9") {
+            audio = new Audio("../assets/audio/Manche_2_Question_3_Zouk_Machine_Maldon.mp3");
+        }
+        // Manche 2 Question 4
+        else if (event.key === "F10") {
+            audio = new Audio("../assets/audio/Manche_2_Question_4_ELEGANCE_Vacances_j_oublie_tout.mp3");
+        }
+        // Manche 2 Question 5 
+        else if (event.key === "F11") {
+            audio = new Audio("../assets/audio/Manche_2_Question_5_Movie_Company_Intros.mp3");
+        }
+        // Manche 2 Question 6 
+        else if (event.key === "F12") {
+            audio = new Audio("../assets/audio/Manche_2_Question_6_Joe_Cocker_You_Can_Leave_Your_Hat_On.mp3");
+        }
+        audio.play();
+    }
+});

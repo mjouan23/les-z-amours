@@ -12,7 +12,7 @@ body {
     overflow: hidden;
 }
 
-.background_finale {
+.background {
     position: absolute;
     top: 50%; /* Déplace l'image de 50% vers le bas */
     left: 50%; /* Déplace l'image de 50% vers la droite */
@@ -36,17 +36,33 @@ body {
     transform: translate(-43%, -50%); /* Recentre l'image en ajustant sa position de moitié de sa taille */
     z-index: 1;
 }
-
-#timer {
+.indicator {
     position: absolute;
     z-index: 3;
-    font-family: "Caveat", cursive;
     color: #000;
-    font-size: 60px;
+    font-size: 50px;
     font-weight: 900;
-    bottom: 21%;
-    left: 30%;
-  transform: translateX(-55%);
+    font-family: "Caveat", cursive;
+}
+#timer {
+    bottom: 22%;
+    left: 27.5%;
+    transform: translateX(-55%);
+}
+#scoreBlue {
+    top: 38%;
+    left: 13%;
+    transform: translateX(-50%);
+}
+#scoreYellow {
+    top: 38%;
+    left: 61.5%;
+    transform: translateX(-50%);
+}
+#scoreRed {
+    bottom: 9%;
+    left: 32.5%;
+    transform: translateX(-50%);
 }
 #response {
     position: absolute;
