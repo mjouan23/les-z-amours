@@ -8,12 +8,19 @@ let timeRest = timeTimer;
 
 // Sélectionner l'élément où afficher le temps restant
 const timerElement = document.getElementById('timer');
-const sound = document.getElementById('sound');
-const soundHeartYellow = document.getElementById('soundHeartYellow');
-const soundHeartRed = document.getElementById('soundHeartRed');
+let sound = new Audio("../assets/sound/sound.mp3");
+const soundHeartYellow = new Audio("../assets/sound/heart_yellow.mp3");
+const soundHeartRed = new Audio("../assets/sound/heart_red.mp3");
+const soundLost = new Audio("../assets/sound/lost.mp3");
+const soundWin = new Audio("../assets/sound/win.mp3");
+
+
+
 const question = document.getElementById('question');
 const response = document.getElementById('response');
 let cptResponse = 0;
+let cptHeartYellow = 0;
+let cptHeartRed = 0;
 
 const url = 'https://imajys.fr/data.php';
 let arQuestion, arRespoonse;
@@ -37,9 +44,19 @@ document.addEventListener('keydown', function(event) {
             heartsYellow[cpt].style.display = 'block';
             soundHeartYellow.play();
             cpt++;
-            question.textContent = arQuestion[cptResponse];
-            response.textContent = arRespoonse[cptResponse];
-            if(cptResponse < arRespoonse.length) cptResponse++;
+            cptHeartYellow++;
+            if(cptHeartYellow == 7) {
+                sound.pause();
+                sound.currentTime = 0;
+                soundWin.play();
+                question.textContent = "";
+                response.textContent = "Bravo !!!";
+                stopTimer();
+            }else {
+                question.textContent = arQuestion[cptResponse];
+                response.textContent = arRespoonse[cptResponse];
+                if(cptResponse < arRespoonse.length) cptResponse++;
+            }
         }
     }
     // Coeur rouge
@@ -48,9 +65,19 @@ document.addEventListener('keydown', function(event) {
             heartsRed[cpt].style.display = 'block';
             soundHeartRed.play();        
             cpt++;
-            question.textContent = arQuestion[cptResponse];
-            response.textContent = arRespoonse[cptResponse];
-            if(cptResponse < arRespoonse.length) cptResponse++;
+            cptHeartRed++;
+            if(cptHeartRed == 5) {
+                sound.pause();
+                sound.currentTime = 0;
+                soundLost.play();
+                question.textContent = "";
+                response.textContent = "Quel Dommage...";
+                stopTimer();
+            } else {
+                question.textContent = arQuestion[cptResponse];
+                response.textContent = arRespoonse[cptResponse];
+                if(cptResponse < arRespoonse.length) cptResponse++;
+            }
         }
     }
     else if (event.key === ' ') {
@@ -59,16 +86,18 @@ document.addEventListener('keydown', function(event) {
         if(cptResponse < arRespoonse.length) cptResponse++;
     }
     // supprimer un coeur
-    else if (event.key === "Backspace") {
-        if(cpt > 0) cpt--;
-        heartsYellow[cpt].style.display = 'none';
-        heartsRed[cpt].style.display = 'none';
-    }
+    // else if (event.key === "Backspace") {
+    //     if(cpt > 0) cpt--;
+    //     heartsYellow[cpt].style.display = 'none';
+    //     heartsRed[cpt].style.display = 'none';
+    // }
     else if (event.key === "Enter") {
-        startTime();
-        question.textContent = arQuestion[cptResponse];
-        response.textContent = arRespoonse[cptResponse];
-        if(cptResponse < arRespoonse.length) cptResponse++;
+        if(timeRest == timeTimer) {
+            startTime();
+            question.textContent = arQuestion[cptResponse];
+            response.textContent = arRespoonse[cptResponse];
+            if(cptResponse < arRespoonse.length) cptResponse++;
+        }
     }
     else if (event.key === 'q') {
         stopTimer();
@@ -77,21 +106,23 @@ document.addEventListener('keydown', function(event) {
 });
 
 function startTime() {
+    sound.play();
     timerElement.textContent = timeRest.toString().padStart(2, '0');
     timerId = setInterval(function() {
         timeRest--;
         timerElement.textContent = timeRest.toString().padStart(2, '0');
         if (timeRest <= 0) {
             clearInterval(timerId);
+            question.textContent = "";
+            response.textContent = "Quel Dommage...";
         }
     }, 1000);
-    sound.play();
 }
 
 // Fonction pour arrêter le minuteur
 function stopTimer() {
     clearInterval(timerId); // Arrêter le minuteur
-    timerElement.textContent = '60'; // Effacer le contenu du timer
+    timerElement.textContent = '00'; // Effacer le contenu du timer
     timeRest = timeTimer;
     sound.pause();
     sound.currentTime = 0;        
