@@ -23,15 +23,13 @@ let cptHeartYellow = 0;
 let cptHeartRed = 0;
 
 const url = 'https://imajys.fr/data.php';
-let arQuestion, arRespoonse;
+let arQuestion, arResponse;
 // Utilisation de l'API Fetch pour récupérer les données JSON
 fetch(url).then(res => {
-    console.log(res);
     return res.json();
 }).then(data => {
     arQuestion = Object.keys(data.data);
-    arRespoonse = Object.values(data.data);
-    console.log(arQuestion);
+    arResponse = Object.values(data.data);
 }).catch(error => {
     console.error('There was a problem with your fetch operation:', error);
 });
@@ -50,12 +48,12 @@ document.addEventListener('keydown', function(event) {
                 sound.currentTime = 0;
                 soundWin.play();
                 question.textContent = "";
-                response.textContent = "Bravo !!!";
+                response.innerHTML = "Bravo !!!";
                 stopTimer();
             }else {
                 question.textContent = arQuestion[cptResponse];
-                response.textContent = arRespoonse[cptResponse];
-                if(cptResponse < arRespoonse.length) cptResponse++;
+                response.innerHTML = arResponse[cptResponse];
+                if(cptResponse < arResponse.length) cptResponse++;
             }
         }
     }
@@ -71,19 +69,19 @@ document.addEventListener('keydown', function(event) {
                 sound.currentTime = 0;
                 soundLost.play();
                 question.textContent = "";
-                response.textContent = "Quel Dommage...";
+                response.innerHTML = "Quel Dommage...";
                 stopTimer();
             } else {
                 question.textContent = arQuestion[cptResponse];
-                response.textContent = arRespoonse[cptResponse];
-                if(cptResponse < arRespoonse.length) cptResponse++;
+                response.innerHTML = arResponse[cptResponse];
+                if(cptResponse < arResponse.length) cptResponse++;
             }
         }
     }
     else if (event.key === ' ') {
         question.textContent = arQuestion[cptResponse];
-        response.textContent = arRespoonse[cptResponse];
-        if(cptResponse < arRespoonse.length) cptResponse++;
+        response.innerHTML = arResponse[cptResponse];
+        if(cptResponse < arResponse.length) cptResponse++;
     }
     // supprimer un coeur
     // else if (event.key === "Backspace") {
@@ -95,8 +93,8 @@ document.addEventListener('keydown', function(event) {
         if(timeRest == timeTimer) {
             startTime();
             question.textContent = arQuestion[cptResponse];
-            response.textContent = arRespoonse[cptResponse];
-            if(cptResponse < arRespoonse.length) cptResponse++;
+            response.innerHTML = arResponse[cptResponse];
+            if(cptResponse < arResponse.length) cptResponse++;
         }
     }
     else if (event.key === 'q') {
@@ -114,7 +112,7 @@ function startTime() {
         if (timeRest <= 0) {
             clearInterval(timerId);
             question.textContent = "";
-            response.textContent = "Quel Dommage...";
+            response.innerHTML = "Quel Dommage...";
         }
     }, 1000);
 }
