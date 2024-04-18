@@ -11,17 +11,20 @@ const timerElement = document.getElementById('timer');
 const sound = document.getElementById('sound');
 const soundHeartYellow = document.getElementById('soundHeartYellow');
 const soundHeartRed = document.getElementById('soundHeartRed');
+const question = document.getElementById('question');
 const response = document.getElementById('response');
 let cptResponse = 0;
 
 const url = 'https://imajys.fr/data.php';
-let arRespoonse;
+let arQuestion, arRespoonse;
 // Utilisation de l'API Fetch pour récupérer les données JSON
 fetch(url).then(res => {
     console.log(res);
     return res.json();
 }).then(data => {
+    arQuestion = Object.keys(data.data);
     arRespoonse = Object.values(data.data);
+    console.log(arQuestion);
 }).catch(error => {
     console.error('There was a problem with your fetch operation:', error);
 });
@@ -34,6 +37,7 @@ document.addEventListener('keydown', function(event) {
             heartsYellow[cpt].style.display = 'block';
             soundHeartYellow.play();
             cpt++;
+            question.textContent = arQuestion[cptResponse];
             response.textContent = arRespoonse[cptResponse];
             if(cptResponse < arRespoonse.length) cptResponse++;
         }
@@ -44,11 +48,13 @@ document.addEventListener('keydown', function(event) {
             heartsRed[cpt].style.display = 'block';
             soundHeartRed.play();        
             cpt++;
+            question.textContent = arQuestion[cptResponse];
             response.textContent = arRespoonse[cptResponse];
             if(cptResponse < arRespoonse.length) cptResponse++;
         }
     }
     else if (event.key === "Enter") {
+        question.textContent = arQuestion[cptResponse];
         response.textContent = arRespoonse[cptResponse];
         if(cptResponse < arRespoonse.length) cptResponse++;
     }
@@ -60,6 +66,7 @@ document.addEventListener('keydown', function(event) {
     }
     else if (event.key === ' ') {
         startTime();
+        question.textContent = arQuestion[cptResponse];
         response.textContent = arRespoonse[cptResponse];
         if(cptResponse < arRespoonse.length) cptResponse++;
     }

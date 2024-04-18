@@ -42,11 +42,11 @@ body {
     z-index: 3;
     font-family: "Caveat", cursive;
     color: #000;
-    font-size: 50px;
+    font-size: 60px;
     font-weight: 900;
-    bottom: 200px; /* Position verticale par rapport au conteneur */
-    left: 550px; /* Position horizontale par rapport au conteneur */
-    background-position: -100px -50px; /* Position de l'élément par rapport à l'image de fond */
+    bottom: 21%;
+    left: 30%;
+  transform: translateX(-55%);
 }
 #response {
     position: absolute;
@@ -57,5 +57,14 @@ body {
     font-weight: 900;
     bottom: 12%;
     left: 50%;
-  transform: translateX(-30%);
+    transform: translateX(-30%);
+}
+
+#question {
+    position: absolute;
+    z-index: 3;
+    width: 300px;
+    height: 30px;
+    bottom: 0;
+    right: 0;
 }
