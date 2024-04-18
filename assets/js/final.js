@@ -23,13 +23,14 @@ let cptHeartYellow = 0;
 let cptHeartRed = 0;
 
 const url = 'https://imajys.fr/data.php';
-let arQuestion, arResponse;
+let arQuestion, arResponse, nbResponse;
 // Utilisation de l'API Fetch pour récupérer les données JSON
 fetch(url).then(res => {
     return res.json();
 }).then(data => {
     arQuestion = Object.keys(data.data);
     arResponse = Object.values(data.data);
+    nbResponse = arResponse.length-1;
 }).catch(error => {
     console.error('There was a problem with your fetch operation:', error);
 });
@@ -53,7 +54,7 @@ document.addEventListener('keydown', function(event) {
             }else {
                 question.textContent = arQuestion[cptResponse];
                 response.innerHTML = arResponse[cptResponse];
-                if(cptResponse < arResponse.length) cptResponse++;
+                if(cptResponse < nbResponse) cptResponse++;
             }
         }
     }
@@ -74,14 +75,14 @@ document.addEventListener('keydown', function(event) {
             } else {
                 question.textContent = arQuestion[cptResponse];
                 response.innerHTML = arResponse[cptResponse];
-                if(cptResponse < arResponse.length) cptResponse++;
+                if(cptResponse < nbResponse) cptResponse++;
             }
         }
     }
     else if (event.key === ' ') {
         question.textContent = arQuestion[cptResponse];
         response.innerHTML = arResponse[cptResponse];
-        if(cptResponse < arResponse.length) cptResponse++;
+        if(cptResponse < nbResponse) cptResponse++;
     }
     // supprimer un coeur
     // else if (event.key === "Backspace") {
@@ -94,7 +95,7 @@ document.addEventListener('keydown', function(event) {
             startTime();
             question.textContent = arQuestion[cptResponse];
             response.innerHTML = arResponse[cptResponse];
-            if(cptResponse < arResponse.length) cptResponse++;
+            if(cptResponse < nbResponse) cptResponse++;
         }
     }
     else if (event.key === 'q') {
