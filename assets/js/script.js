@@ -27,17 +27,14 @@ document.addEventListener('keydown', function(event) {
     }
     // finale 
     else if (event.key === "Enter") {
-        // console.log("scoreBlue", scoreBlue);
-        // console.log("scoreYellow", scoreYellow);
-        // console.log("scoreRed", scoreRed);
-        if(scoreBlue > scoreYellow && scoreBlue > scoreRed) {
-            winner = "Cindy&Jérémy";
-        }
-        else if (scoreYellow > scoreBlue && scoreYellow > scoreRed) {
+        if (scoreYellow > scoreBlue && scoreYellow > scoreRed) {
             winner = "Marie&Marc";
         }
         else if (scoreRed > scoreBlue && scoreRed > scoreYellow) {
             winner = "Nathalie&Didier";
+        } else {
+            
+            winner = "Cindy&Jérémy";
         }
 
         window.location.href = "finale.html?winner=" + encodeURIComponent(winner);

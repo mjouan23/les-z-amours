@@ -22,6 +22,8 @@ const response = document.getElementById('response');
 let cptResponse = 0;
 let cptHeartYellow = 0;
 let cptHeartRed = 0;
+let lastHeart;
+let pause = false;
 
 // Récupération des paramètres de l'URL
 const params = new URLSearchParams(window.location.search);
@@ -50,6 +52,7 @@ document.addEventListener('keydown', function(event) {
             soundHeartYellow.play();
             cpt++;
             cptHeartYellow++;
+            lastHeart = 'j';
             if(cptHeartYellow == 7) {
                 sound.pause();
                 sound.currentTime = 0;
@@ -71,6 +74,7 @@ document.addEventListener('keydown', function(event) {
             soundHeartRed.play();        
             cpt++;
             cptHeartRed++;
+            lastHeart = 'r';
             if(cptHeartRed == 5) {
                 sound.pause();
                 sound.currentTime = 0;
@@ -91,22 +95,39 @@ document.addEventListener('keydown', function(event) {
         if(cptResponse < nbResponse) cptResponse++;
     }
     // supprimer un coeur
-    // else if (event.key === "Backspace") {
-    //     if(cpt > 0) cpt--;
-    //     heartsYellow[cpt].style.display = 'none';
-    //     heartsRed[cpt].style.display = 'none';
-    // }
+    else if (event.key === "Backspace") {
+        // On décrémente le compteur global
+        if(cpt > 0) cpt--;
+        // On décrémente le compteur de coeur jaune ou rouge en fonction du dernier coeur ajouté
+        if(lastHeart == 'j')
+            cptHeartYellow--;
+        else if (lastHeart == 'r')
+            cptHeartRed--;
+
+        heartsYellow[cpt].style.display = 'none';
+        heartsRed[cpt].style.display = 'none';
+    }
     else if (event.key === "Enter") {
+        // Si jamais démarer, lancer le jeu
         if(timeRest == timeTimer) {
             startTime();
             question.textContent = arQuestion[cptResponse];
             response.innerHTML = arResponse[cptResponse];
             if(cptResponse < nbResponse) cptResponse++;
         }
+        // Sinon mettre sur pause le compteur
+        else if(pause) {
+            startTime();
+            pause = false;
+        } else {
+            clearInterval(timerId);
+            sound.pause();
+            pause = true;
+        }
     }
-    else if (event.key === 'q') {
-        stopTimer();
-    }
+    // else if (event.key === 'q') {
+    //     stopTimer();
+    // }
     
 });
 
