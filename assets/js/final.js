@@ -1,10 +1,12 @@
+
+
 let cpt = 0;
 let heartsYellow = document.querySelectorAll('.hearts > img.heart_yellow');
 let heartsRed = document.querySelectorAll('.hearts > img.heart_red');
 let timerId;
 let timeTimer = 60;
-
 let timeRest = timeTimer; 
+
 
 // Sélectionner l'élément où afficher le temps restant
 const timerElement = document.getElementById('timer');
@@ -15,14 +17,18 @@ const soundLost = new Audio("../assets/sound/lost.mp3");
 const soundWin = new Audio("../assets/sound/win.mp3");
 
 
-
 const question = document.getElementById('question');
 const response = document.getElementById('response');
 let cptResponse = 0;
 let cptHeartYellow = 0;
 let cptHeartRed = 0;
 
-const url = 'https://imajys.fr/data.php';
+// Récupération des paramètres de l'URL
+const params = new URLSearchParams(window.location.search);
+const winner = params.get('winner');
+response.textContent = winner;
+
+const url = 'https://imajys.fr/data.php?winner=' + encodeURIComponent(winner);
 let arQuestion, arResponse, nbResponse;
 // Utilisation de l'API Fetch pour récupérer les données JSON
 fetch(url).then(res => {

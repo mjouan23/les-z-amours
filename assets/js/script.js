@@ -1,32 +1,46 @@
 let audio;
-let divScoreBlue = document.getElementById('scoreBlue');
-let divScoreYellow = document.getElementById('scoreYellow');
-let divScoreRed = document.getElementById('scoreRed');
+let divScoreBlue = document.getElementById('divScoreBlue');
+let divScoreYellow = document.getElementById('divScoreYellow');
+let divScoreRed = document.getElementById('divScoreRed');
+let scoreBlue = 0, scoreYellow = 0, scoreRed = 0, winner;
 
 document.addEventListener('keydown', function(event) {
     event.preventDefault();
     
     // Point à l'équipe bleue
     if (event.key === "b") {
-        let scoreBlue = parseInt(divScoreBlue.textContent);
+        scoreBlue = parseInt(divScoreBlue.textContent);
         scoreBlue++;
         divScoreBlue.textContent = scoreBlue;
     }
     // Point à l'équipe jaune
     else if (event.key === "j") {
-        let scoreYellow = parseInt(divScoreYellow.textContent);
+        scoreYellow = parseInt(divScoreYellow.textContent);
         scoreYellow++;
         divScoreYellow.textContent = scoreYellow;
     }
     // Point à l'équipe rouge
     else if (event.key === "r") {
-        let scoreRed = parseInt(divScoreRed.textContent);
+        scoreRed = parseInt(divScoreRed.textContent);
         scoreRed++;
         divScoreRed.textContent = scoreRed;
     }
     // finale 
     else if (event.key === "Enter") {
-        window.location.href = "finale.html";
+        // console.log("scoreBlue", scoreBlue);
+        // console.log("scoreYellow", scoreYellow);
+        // console.log("scoreRed", scoreRed);
+        if(scoreBlue > scoreYellow && scoreBlue > scoreRed) {
+            winner = "Cindy&Jérémy";
+        }
+        else if (scoreYellow > scoreBlue && scoreYellow > scoreRed) {
+            winner = "Marie&Marc";
+        }
+        else if (scoreRed > scoreBlue && scoreRed > scoreYellow) {
+            winner = "Nathalie&Didier";
+        }
+
+        window.location.href = "finale.html?winner=" + encodeURIComponent(winner);
     }
 
     // Gestion des jingles

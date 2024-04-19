@@ -31,17 +31,17 @@ body {
     font-family: "Caveat", cursive;
 }
 /* Page Phase 1 */
-#scoreBlue {
+#divScoreBlue {
     top: 38%;
     left: 13%;
     transform: translateX(-50%);
 }
-#scoreYellow {
+#divScoreYellow {
     top: 38%;
     left: 61.5%;
     transform: translateX(-50%);
 }
-#scoreRed {
+#divScoreRed {
     bottom: 9%;
     left: 32.5%;
     transform: translateX(-50%);
