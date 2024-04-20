@@ -61,7 +61,7 @@ document.addEventListener('keydown', function(event) {
                 response.innerHTML = "Bravo !!!";
                 stopTimer();
             }else {
-                question.textContent = arQuestion[cptResponse];
+                question.textContent = arQuestion[cptResponse].replace("question", "Q");
                 response.innerHTML = arResponse[cptResponse];
                 if(cptResponse < nbResponse) cptResponse++;
             }
@@ -83,14 +83,14 @@ document.addEventListener('keydown', function(event) {
                 response.innerHTML = "Quel Dommage...";
                 stopTimer();
             } else {
-                question.textContent = arQuestion[cptResponse];
+                question.textContent = arQuestion[cptResponse].replace("question", "Q");
                 response.innerHTML = arResponse[cptResponse];
                 if(cptResponse < nbResponse) cptResponse++;
             }
         }
     }
     else if (event.key === ' ') {
-        question.textContent = arQuestion[cptResponse];
+        question.textContent = arQuestion[cptResponse].replace("question", "Q");
         response.innerHTML = arResponse[cptResponse];
         if(cptResponse < nbResponse) cptResponse++;
     }
@@ -111,7 +111,7 @@ document.addEventListener('keydown', function(event) {
         // Si jamais démarer, lancer le jeu
         if(timeRest == timeTimer) {
             startTime();
-            question.textContent = arQuestion[cptResponse];
+            question.textContent = arQuestion[cptResponse].replace("question", "Q");
             response.innerHTML = arResponse[cptResponse];
             if(cptResponse < nbResponse) cptResponse++;
         }
@@ -125,9 +125,6 @@ document.addEventListener('keydown', function(event) {
             pause = true;
         }
     }
-    // else if (event.key === 'q') {
-    //     stopTimer();
-    // }
     
 });
 
