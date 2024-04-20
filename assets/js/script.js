@@ -10,19 +10,34 @@ document.addEventListener('keydown', function(event) {
     // Point à l'équipe bleue
     if (event.key === "b") {
         scoreBlue = parseInt(divScoreBlue.textContent);
-        scoreBlue++;
+        scoreBlue = scoreBlue + 5;
+        divScoreBlue.textContent = scoreBlue;
+    }
+    else if (event.key === "n") {
+        scoreBlue = parseInt(divScoreBlue.textContent);
+        scoreBlue = scoreBlue - 5;
         divScoreBlue.textContent = scoreBlue;
     }
     // Point à l'équipe jaune
     else if (event.key === "j") {
         scoreYellow = parseInt(divScoreYellow.textContent);
-        scoreYellow++;
+        scoreYellow = scoreYellow + 5;
+        divScoreYellow.textContent = scoreYellow;
+    }
+    else if (event.key === "k") {
+        scoreYellow = parseInt(divScoreYellow.textContent);
+        scoreYellow = scoreYellow - 5;
         divScoreYellow.textContent = scoreYellow;
     }
     // Point à l'équipe rouge
     else if (event.key === "r") {
         scoreRed = parseInt(divScoreRed.textContent);
-        scoreRed++;
+        scoreRed = scoreRed + 5;
+        divScoreRed.textContent = scoreRed;
+    }
+    else if (event.key === "t") {
+        scoreRed = parseInt(divScoreRed.textContent);
+        scoreRed = scoreRed - 5;
         divScoreRed.textContent = scoreRed;
     }
     // finale 
