@@ -130,13 +130,11 @@ document.addEventListener('keydown', function(event) {
         
         videoContainer.appendChild(video);
 
+        // Supprimez la vidéo à la fin de la lecture
+        video.addEventListener('ended', function() {
+            videoContainer.removeChild(video);
+        });
         video.play();
 
     }
 });
-// Supprimez la vidéo à la fin de la lecture
-if (video && !video.paused) {
-    video.addEventListener('ended', function() {
-        videoContainer.removeChild(video);
-    });
-}
