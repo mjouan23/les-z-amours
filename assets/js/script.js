@@ -135,6 +135,8 @@ document.addEventListener('keydown', function(event) {
     }
 });
 // Supprimez la vidéo à la fin de la lecture
-video.addEventListener('ended', function() {
-    videoContainer.removeChild(video);
-});
+if (video && !video.paused) {
+    video.addEventListener('ended', function() {
+        videoContainer.removeChild(video);
+    });
+}

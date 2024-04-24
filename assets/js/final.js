@@ -60,6 +60,7 @@ document.addEventListener('keydown', function(event) {
                 question.textContent = "";
                 response.innerHTML = "Bravo !!!";
                 stopTimer();
+                setTimeout(playVideoGift, 5000);
             }else {
                 question.textContent = arQuestion[cptResponse].replace("question", "Q");
                 response.innerHTML = arResponse[cptResponse];
@@ -82,6 +83,7 @@ document.addEventListener('keydown', function(event) {
                 question.textContent = "";
                 response.innerHTML = "Quel Dommage...";
                 stopTimer();
+                setTimeout(playVideoGift, 5000);
             } else {
                 question.textContent = arQuestion[cptResponse].replace("question", "Q");
                 response.innerHTML = arResponse[cptResponse];
@@ -138,6 +140,7 @@ function startTime() {
             clearInterval(timerId);
             question.textContent = "";
             response.innerHTML = "Quel Dommage...";
+            setTimeout(playVideoGift, 5000);
         }
     }, 1000);
 }
@@ -149,4 +152,11 @@ function stopTimer() {
     timeRest = timeTimer;
     sound.pause();
     sound.currentTime = 0;        
+}
+
+function playVideoGift() {
+    video = document.createElement('video');
+    video.src = '../assets/video/lot.mp4';
+    videoContainer.appendChild(video);
+    video.play();
 }
