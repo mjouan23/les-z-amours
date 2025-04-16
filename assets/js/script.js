@@ -42,13 +42,13 @@ document.addEventListener('keydown', function(event) {
     // finale 
     else if (event.key === "Enter") {
         if (scoreYellow > scoreBlue && scoreYellow > scoreRed) {
-            winner = "Marie&Marc";
+            winner = "Delphine&David";
         }
         else if (scoreRed > scoreBlue && scoreRed > scoreYellow) {
-            winner = "Nathalie&Didier";
+            winner = "Zoe&Thomas";
         } else {
             
-            winner = "Cindy&Jérémy";
+            winner = "Lydie&Dominique";
         }
 
         window.location.href = "finale.html?winner=" + encodeURIComponent(winner);
