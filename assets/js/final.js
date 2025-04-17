@@ -4,7 +4,7 @@ let cpt = 0;
 let heartsYellow = document.querySelectorAll('.hearts > img.heart_yellow');
 let heartsRed = document.querySelectorAll('.hearts > img.heart_red');
 let timerId;
-let timeTimer = 60;
+let timeTimer = 90;
 let timeRest = timeTimer; 
 
 
