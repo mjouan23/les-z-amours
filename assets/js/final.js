@@ -135,8 +135,10 @@ function startTime() {
     timerElement.textContent = timeRest.toString().padStart(2, '0');
     timerId = setInterval(function() {
         timeRest--;
+        
         timerElement.textContent = timeRest.toString().padStart(2, '0');
         if (timeRest <= 0) {
+            
             clearInterval(timerId);
             question.textContent = "";
             response.innerHTML = "Quel Dommage...";
