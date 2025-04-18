@@ -43,7 +43,6 @@ fetch(url).then(res => {
     console.error('There was a problem with your fetch operation:', error);
 });
 
-
 document.addEventListener('keydown', function(event) {
     // Coeur jaune
     if (event.key === 'j') {
@@ -138,7 +137,7 @@ function startTime() {
         
         timerElement.textContent = timeRest.toString().padStart(2, '0');
         if (timeRest <= 0) {
-            
+            soundLost.play();
             clearInterval(timerId);
             question.textContent = "";
             response.innerHTML = "Quel Dommage...";
